@@ -5,4 +5,4 @@ node_modules/
 .env
 
 # Ignore key.js file
-config/key.js
+./config/key.js
