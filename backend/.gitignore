@@ -3,3 +3,6 @@ node_modules/
 
 #Ignore .env file
 .env
+
+# Ignore key.js file
+config/key.js
