@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="authentication.js"></script> 
+    <title>Your Dashboard</title>
+</head>
+
+<body>
+    <div class="dashboard-title">
+       Your Dashboard
+    </div>
+    
+    <div role="main" class="account-container">
+        <div class="account-navigation">
+            <div class="tabs">
+                <a href="#" class="tab active" id="settingsTab" onclick="toggleTabs('settings')">Settings</a>
+                <a href="#" class="tab" id="reservationsTab" onclick="toggleTabs('reservations')">Reservations</a>
+            </div>
+            <div class="admin-links">
+                <a href="#" class="btn-link" onclick="signOut()">Sign Out</a>
+            </div>
+        </div>
+
+        <div class="account-settings">
+            <div class="account-settings-left" id="settingsContent">
+                <div class="panel open">
+                    <div class="panel-heading">Sign-In Settings</div>
+                    <div class="panel-content">
+                        <h2>Username/Email</h2>
+                        <div class="account-email-wrapper">
+                            <p></p>
+                        </div>
+                        <br>
+                        <button class="btn-link">Change</button>
+                        <br>
+                        <br>
+                        <h2>Password</h2>
+                        <a href=""><button class="btn-link">Change</button></a>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-heading">Favorite Spots</div>
+                    <div class="panel-content">
+                        <p>No favorite spots saved yet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="account-settings-right" id="reservationsContent" style="display: none;">
+                <div class="panel">
+                    <div class="panel-heading">Reservations</div>
+                    <div class="panel-content">
+                        <p>No reservations made yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleTabs(tab) {
+            const settingsTab = document.getElementById('settingsTab');
+            const reservationsTab = document.getElementById('reservationsTab');
+            const settingsContent = document.getElementById('settingsContent');
+            const reservationsContent = document.getElementById('reservationsContent');
+            
+            if (tab === 'settings') {
+                settingsTab.classList.add('active');
+                reservationsTab.classList.remove('active');
+                settingsContent.style.display = 'block';
+                reservationsContent.style.display = 'none';
+            } else if (tab === 'reservations') {
+                settingsTab.classList.remove('active');
+                reservationsTab.classList.add('active');
+                settingsContent.style.display = 'none';
+                reservationsContent.style.display = 'block';
+            }
+        }
+    </script>
+   
+</body>
+</html>
