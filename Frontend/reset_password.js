@@ -9,22 +9,22 @@ document.addEventListener('DOMContentLoaded', function () {
     confirmPasswordInput.addEventListener('input', validatePasswords);
 
     submitButton.addEventListener('click', function (e) {
-        e.preventDefault(); // Prevent form submission
+        e.preventDefault(); 
         const newPassword = newPasswordInput.value.trim();
         const confirmPassword = confirmPasswordInput.value.trim();
-        const minLength = 6; // Minimum password length (adjust as needed)
+        const minLength = 6; 
 
         if (newPassword === confirmPassword && newPassword.length >= minLength) {
-            // Password reset successful
-            alert('Password reset successful!'); // Show success alert
-            window.location.href = 'login.html'; // Redirect to login page on successful password reset
+            
+            alert('Password reset successful!'); 
+            window.location.href = 'login.html'; 
         }
     });
 
     function validatePasswords() {
         const newPassword = newPasswordInput.value.trim();
         const confirmPassword = confirmPasswordInput.value.trim();
-        const minLength = 6; // Minimum password length (adjust as needed)
+        const minLength = 6; 
 
         if (newPassword.length < minLength) {
             newPasswordError.textContent = `Password must be at least ${minLength} characters long`;

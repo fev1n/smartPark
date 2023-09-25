@@ -1,10 +1,10 @@
-// script.js
+
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('signupButton').addEventListener('click', function() {
-        window.location.href = 'signup.html'; // Redirect to signup page
+        window.location.href = 'signup.html'; 
     });
 
     document.getElementById('loginButton').addEventListener('click', function() {
-        window.location.href = 'login.html'; // Redirect to login page
+        window.location.href = 'login.html'; 
     });
 });
