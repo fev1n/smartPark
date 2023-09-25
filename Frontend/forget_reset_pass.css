@@ -1,0 +1,51 @@
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.logo img {
+    max-width: 600px;
+    max-height: 600px;
+}
+
+.content {
+    text-align: center;
+    text-decoration: solid;
+    font-size: 19px;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.input-group input {
+    padding: 10px;
+    width: 350px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.content button{
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.forgot-password-link a {
+    color: #007BFF;
+    text-decoration: none;
+}
