@@ -1,6 +1,7 @@
 import React from 'react';
 import bgpng from '../assets/img2.jpg';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 export default function Form() {
   const { register, handleSubmit, formState: { errors, isValid }} = useForm({
@@ -8,14 +9,14 @@ export default function Form() {
   });
 
   
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     if (isValid) {
-      if (data.password === data.confirmpwd) {
+     
         console.log(data);
-      } else {
-        console.error('Passwords do not match.');
-      }
+        navigate('/dashboard', { state: { email: data.email } });
+
     } else {
       console.error('Form contains validation errors.');
     }
@@ -59,10 +60,6 @@ export default function Form() {
     
             {errors.confirmpwd?.type === 'validate' &&
               'Passwords do not match'}
-
-            
-            
-
             <button className='btn' disabled={!isValid}>Login</button>
             <p>
       Don't have an account? <Link to="/signup">Click here to sign up</Link>.
