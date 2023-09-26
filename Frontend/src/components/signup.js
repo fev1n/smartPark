@@ -69,13 +69,7 @@ export default function Form() {
             />
             {errors.confirmpwd?.type === "validate" && "Passwords do not match"}
             
-            <input
-              type="text"
-              {...register("mobile", { required: true, maxLength: 10 })}
-              placeholder='mobile number'
-            />
-            {errors.mobile?.type === "required" && "Mobile Number is required"}
-            {errors.mobile?.type === "maxLength" && "Max Length Exceeded"}
+           
             <button className='btn' disabled={!isValid}>Sign In</button>
           </form>
         </div>
