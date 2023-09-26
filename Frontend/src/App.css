@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* > * {
+    font-family: "Poppins", cursive;
+    margin: 0;
+}
+
+body{
+  background: #f0f0f2;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  
+  
+}
+
+.App {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.register{
+  max-width: 978px;
+  align-items: center;
+  max-height: 978px;
+  margin-left: 250px;
+  margin-top: 100px;
+  
+  display:flex;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+  
+  background-color: white;
+}
+
+.register span{
+  color: #adb5bd;
+}
+
+#form{
+  max-width: 320px;
+  width: 100vw;
+  margin: 2em auto;
+}
+
+#form >  input, .btn{
+  border: 1px solid #e9ecef;
+  padding: .9em 1em;
+}
+
+#form > input:focus{
+  outline: none;
+}
+
+#form > .btn{
+  background-color: #003049;
+  color: #e9ecef;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.flex{
+  display: flex;
+  gap: 1em;
+}
+
+.flex-col{
+  flex-direction: column;
+}
+
+.register .col-1{
+  margin: auto;
+  padding: 3em 0;
+}
+
+.register .col-2 img {
+  width: 100%; 
+  max-height: 100%; 
+  align-items: center;
+ 
+  display: none;
+}
+
+.register1 .col-2 img {
+  padding-right: 150px;
+  width: 60%;
+   max-height: 100%; 
+   align-items: left;
+  margin-right: 100px;
+   
+ }
+ .register1 .col-1{
+  margin: auto;
+  padding: 3em 0;
+}
+.register1 span{
+  color: #adb5bd;
+}
+
+.register1{
+  max-width: 978px;
+  align-items: center;
+  max-height: 978px;
+  margin-left: 250px;
+  margin-top: 100px;
+  
+  display:flex;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+  
+  background-color: white;
+}
+@media screen and (min-width: 860px)  {
+  .register .col-2 img{
+    display: initial;
+  }
+}
