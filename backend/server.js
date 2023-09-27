@@ -5,8 +5,12 @@ const mongoose = require("mongoose");
 const db = require("./config/key").MONGODB_URI;
 const passport = require("passport");
 const users = require("./routes/api/user");
+const cors = require("cors");
 
 const app = express();
+
+// CORS Middleware
+app.use(cors());
 
 // Bodyparser Middlewares
 app.use(

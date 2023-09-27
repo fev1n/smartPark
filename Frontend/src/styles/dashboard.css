@@ -17,11 +17,21 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .btn{
-  background-color: #007BFF;
+  background-color: #003049;
   color: #e9ecef;
   font-size: 1em;
   cursor: pointer;
+  border: none;
+  border-radius: 6px;
 }
+ 
+.link{
+  color: #f9fafb;
+  font-size: 1em;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .account-navigation {
   width: 30%;
   border-right: 1px solid #e5e5e5;
@@ -47,13 +57,17 @@
   color: #0056b3;
 }
 
+.btn:hover {
+  background-color: #0056b3;
+}
+
 .admin-links {
   margin-top: 20px;
 }
 
 .btn-link {
   padding: 10px 15px;
-  background-color: #007BFF;
+  background-color: #003049;
   color: #fff;
   border: none;
   border-radius: 5px;
