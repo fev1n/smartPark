@@ -1,0 +1,56 @@
+/* src/components/SearchPage.css */
+
+/* Prevent the body and HTML from showing a scroll bar */
+body, html {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  overflow: hidden; /* Hide overflow for the entire container */
+}
+
+.search-bar {
+  width: 30%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+  overflow-y: auto; /* Add a scroll bar to the search bar if necessary */
+}
+
+.map-container {
+  width: 70%;
+  display: flex;
+  flex-direction: column; /* Stack the map and list vertically */
+  overflow: hidden; /* Hide overflow for the map container */
+}
+
+/* Style the search input */
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.location-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto; /* Add a scroll bar to the location list if necessary */
+  flex-grow: 1; /* Allow the list to grow and take available space */
+}
+
+.location-list-item {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* Add hover effect for list items */
+.location-list-item:hover {
+  background-color: #e0e0e0;
+}
