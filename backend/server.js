@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const db = require("./config/key").MONGODB_URI;
 const passport = require("passport");
 const users = require("./routes/api/user");
+const search = require("./routes/api/search");
 const cors = require("cors");
 
 const app = express();
@@ -36,6 +37,8 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/api/users", users);
+
+app.use("/api/search", search);
 
 // Server listening check
 app.listen(process.env.PORT, () =>

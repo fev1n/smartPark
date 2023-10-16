@@ -1,56 +1,113 @@
-/* src/components/SearchPage.css */
-
-/* Prevent the body and HTML from showing a scroll bar */
-body, html {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-}
+/* src/components/searchPage.css */
 
 .search-container {
+  font-family: 'Arial', sans-serif;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: #f6f8fa;
+  border-radius: 10px;
+}
+
+.search-bar-container {
   display: flex;
-  flex-direction: row;
-  height: 100%;
-  overflow: hidden; /* Hide overflow for the entire container */
+  justify-content: space-between;
+  margin-bottom: 30px;
 }
 
-.search-bar {
-  width: 30%;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: #f0f0f0;
-  overflow-y: auto; /* Add a scroll bar to the search bar if necessary */
-}
-
-.map-container {
+.search-input {
   width: 70%;
-  display: flex;
-  flex-direction: column; /* Stack the map and list vertically */
-  overflow: hidden; /* Hide overflow for the map container */
+  padding: 15px;
+  border: 2px solid #007BFF;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  font-weight: bold;
 }
 
-/* Style the search input */
-.search-bar input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.location-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  overflow-y: auto; /* Add a scroll bar to the location list if necessary */
-  flex-grow: 1; /* Allow the list to grow and take available space */
-}
-
-.location-list-item {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+.search-button {
+  width: 25%;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 15px 20px;
   cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
 }
 
-/* Add hover effect for list items */
-.location-list-item:hover {
-  background-color: #e0e0e0;
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+.results-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.spot-card {
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 30px;
+  background-color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.spot-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.spot-price {
+  font-weight: bold;
+  color: #009966;  
+  margin-top: auto;
+  font-size: 20px;
+}
+.search-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.spot-card h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.spot-card p {
+  color: #666;
+  font-size: 18px;
+}
+
+.navigation-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.go-back-button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.go-back-button:hover {
+  background-color: #0056b3;
 }
