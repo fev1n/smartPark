@@ -1,15 +1,14 @@
-// spotList.js
 
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../../styles/spotList.css";
 
 function SpotList({ spots }) {
-  const [selectedSpot] = useState(null);
   const navigate = useNavigate();
+  
   const handleBookNow = (spot) => {
-    // Navigate to the booking page with the spot information
-    navigate(`/booking/${spot.id}`, { state: { spot } });
+    console.log(spot);
+    navigate(`/spot/${spot.address}`, { state: { spot } });
   };
 
   return (
@@ -22,7 +21,7 @@ function SpotList({ spots }) {
           <p>{spot.address}</p>
           <p>{spot.distance} KM</p>
           <button
-            onClick={() => handleBookNow(selectedSpot)}
+            onClick={() => handleBookNow(spot)}
             className="book-now-btn"
           >
             Book Now

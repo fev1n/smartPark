@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import SearchBar from "./searchBar.js";
 import SpotList from "./spotList.js";
 import { useNavigate, Link } from "react-router-dom";
-import "../../styles/searchPage.css";
+import "../../styles/SearchPage.css";
 import {
   GoogleMap,
   LoadScript,
@@ -11,7 +11,7 @@ import {
 } from "@react-google-maps/api";
 
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
-  const R = 6371; // Radius of the earth in km
+  const R = 6371; 
   const dLat = (lat2 - lat1) * (Math.PI / 180);
   const dLon = (lon2 - lon1) * (Math.PI / 180);
   const a =
@@ -21,7 +21,7 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
       Math.sin(dLon / 2) *
       Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  const distance = R * c; // Distance in kilometers
+  const distance = R * c; 
   return distance;
 };
 
@@ -86,7 +86,7 @@ function SearchPage() {
             price: "Not specified",
             lat: spot.lat,
             lng: spot.lng,
-            distance: distance.toFixed(2), // Rounded to 2 decimal places
+            distance: distance.toFixed(2), 
           };
         });
 
@@ -115,8 +115,7 @@ function SearchPage() {
   };
 
   const handleBookNow = (spot) => {
-    // Navigate to the booking page with the spot information
-    navigate(`/booking/${spot.id}`, { state: { spot } });
+    navigate(`/spot/${spot.location}`, { state: { spot } });
   };
 
   return (
@@ -174,7 +173,7 @@ function SearchPage() {
           ))}
         </GoogleMap>
       </LoadScript>
-      <SpotList spots={results} />
+      <SpotList spots={results} onBookNow={handleBookNow}/>
     </div>
   );
 }
