@@ -142,7 +142,6 @@ export default function Dashboard() {
 
                 {activeTab === "Saved Vehicles" && (
                   <div>{}</div>
-                  <div></div>
                 )}
 
                 {activeTab === "Saved Vehicles" && (
