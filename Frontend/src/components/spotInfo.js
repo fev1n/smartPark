@@ -138,8 +138,8 @@ function SpotInfo() {
             className="form-control"
           />
         </div>
-        <button onClick={sendContactInfo} className="btn btn-primary">
-          Send Code
+        <button onClick={sendContactInfo} className="btn btn-primary" >
+          Confirm Booking 
         </button>
       </div>
     </div>
