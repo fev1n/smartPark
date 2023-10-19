@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import SearchBar from "./searchBar.js";
 import SpotList from "./spotList.js";
 import { useNavigate } from "react-router-dom";
-import "../../styles/searchPage.css";
+import "../../styles/SearchPage.css";
 import {
   GoogleMap,
   LoadScript,
