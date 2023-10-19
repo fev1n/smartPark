@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import SearchBar from "./searchBar.js";
 import SpotList from "./spotList.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../../styles/searchPage.css";
 import {
   GoogleMap,
@@ -9,6 +9,21 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+
+const calculateDistance = (lat1, lon1, lat2, lon2) => {
+  const R = 6371; // Radius of the Earth in kilometers
+  const dLat = (lat2 - lat1) * (Math.PI / 180);
+  const dLon = (lon2 - lon1) * (Math.PI / 180);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * (Math.PI / 180)) *
+      Math.cos(lat2 * (Math.PI / 180)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = R * c; // Distance in kilometers
+  return distance;
+};
 
 function SearchPage() {
   const [results, setResults] = useState([]);
@@ -39,8 +54,12 @@ function SearchPage() {
 
         if (parkingData && parkingData.length > 0) {
           const spots = parkingData.map((spot) => {
-            console.log("spot.lat" + spot.lat);
-            console.log("spot.lng" + spot.lng);
+            const distance = calculateDistance(
+              latlng.lat,
+              latlng.lng,
+              spot.lat,
+              spot.lng
+            );
 
             return {
               id: spot.id || Math.random().toString(36).substr(2, 9),
@@ -49,10 +68,14 @@ function SearchPage() {
               price: "Not specified",
               lat: spot.lat,
               lng: spot.lng,
+              distance: distance.toFixed(2), // Rounded to 2 decimal places
             };
           });
 
-          setResults(spots);
+          const sortedSpots = [...spots].sort(
+            (a, b) => a.distance - b.distance
+          );
+          setResults(sortedSpots);
         } else {
           console.log("No Parking Spots Found");
         }
@@ -62,6 +85,11 @@ function SearchPage() {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+  };
+
+  const handleBookNow = (spot) => {
+    // Navigate to the booking page with the spot information
+    navigate(`/booking/${spot.id}`, { state: { spot } });
   };
 
   return (
@@ -96,24 +124,29 @@ function SearchPage() {
               position={{ lat: spot.lat, lng: spot.lng }}
               title={spot.name}
               onClick={() => setSelectedSpot(spot)}
-            />
-          ))}
-
-          {selectedSpot && (
-            <InfoWindow
-              position={{ lat: selectedSpot.lat, lng: selectedSpot.lng }}
-              onCloseClick={() => setSelectedSpot(null)}
             >
-              <div>
-                <h4>{selectedSpot.name}</h4>
-                <p>{selectedSpot.address}</p>
-                <p>{selectedSpot.price}</p>
-              </div>
-            </InfoWindow>
-          )}
+              {selectedSpot && selectedSpot.id === spot.id && (
+                <InfoWindow
+                  position={{ lat: selectedSpot.lat, lng: selectedSpot.lng }}
+                  onCloseClick={() => setSelectedSpot(null)}
+                >
+                  <div>
+                    <h4>{selectedSpot.name}</h4>
+                    <p>{selectedSpot.address}</p>
+                    <p>{selectedSpot.distance}km</p>
+                    <button
+                      onClick={() => handleBookNow(selectedSpot)}
+                      className="book-now-btn"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </InfoWindow>
+              )}
+            </Marker>
+          ))}
         </GoogleMap>
       </LoadScript>
-
       <SpotList spots={results} />
     </div>
   );
