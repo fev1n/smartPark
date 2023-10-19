@@ -18,6 +18,7 @@ export default function Form() {
   const navigate = useNavigate();
 
   const [loginError, setLoginError] = useState(""); 
+  const [showPassword, setShowPassword] = useState(false);
 
   async function onSubmit(data) {
     console.log(data);
@@ -80,9 +81,9 @@ export default function Form() {
               placeholder="email"
             />
             <span className="error-message">{errors.email?.message}</span>
-
+            <div className="password-container">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               {...register("password", {
                 required: "Password is required",
                 minLength: {
@@ -100,7 +101,14 @@ export default function Form() {
               placeholder="Password"
             />
             <span className="error-message">{errors.password?.message}</span>
-
+            <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+              </div>
             {loginError && (
               <p className="login-error-message">{loginError}</p>
             )}

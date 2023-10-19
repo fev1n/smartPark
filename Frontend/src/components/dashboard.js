@@ -7,11 +7,12 @@ export default function Dashboard() {
   const emailFromLogin = location.state?.email || null;
   const navigate = useNavigate();
 
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Initialize as false
   const [activeTab, setActiveTab] = useState("Settings");
   const [user, setUser] = useState({ email: null });
 
   useEffect(() => {
+    // Simulate user authentication and set the user's email
     setTimeout(() => {
       setIsAuthenticated(true);
       setUser({ email: emailFromLogin });
@@ -19,23 +20,19 @@ export default function Dashboard() {
   }, [emailFromLogin]);
 
   const handleEmailChangeAlert = () => {
-    window.alert("Contact administrator to change your email");
+    window.alert("Contact an administrator to change your email");
   };
 
   const handlePasswordChangeAlert = () => {
-    window.alert("Contact administrator to change your password");
-  };
-
-  const handleSearchRedirect = () => {
-    navigate("/search");
+    window.alert("Contact an administrator to change your password");
   };
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
     if (tabName === "Payment Methods") {
-      window.alert("Contact administrator to add a payment method");
+      window.alert("Contact an administrator to add a payment method");
     } else if (tabName === "Saved Vehicles") {
-      window.alert("Contact administrator to add a vehicle");
+      window.alert("Contact an administrator to add a vehicle");
     }
   };
 
@@ -45,9 +42,6 @@ export default function Dashboard() {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 text-size-xs-30 text-size-md-36 text-align-xs-center text-align-md-left">
-              <button className="btn search-btn" onClick={handleSearchRedirect}>
-                Search for a spot
-              </button>
               Account Settings
             </div>
           </div>
@@ -59,7 +53,17 @@ export default function Dashboard() {
           <div className="row">
             <div className="col-lg-3">
               <div className="account-navigation">
-                <div className="tabs">
+                
+
+                <div className="admin-links">
+                  
+                </div>
+              </div>
+            </div>
+
+            <div className="col-lg-9">
+              <div className="account-container">
+              <div className="tabs">
                   <p
                     className={`tab ${activeTab === "Settings" && "active"}`}
                     onClick={() => handleTabClick("Settings")}
@@ -82,20 +86,12 @@ export default function Dashboard() {
                   >
                     Saved Vehicles
                   </p>
-                </div>
-
-                <div className="admin-links">
                   <button className="btn">
                     <Link to="/login" className="link">
                       Sign out
                     </Link>
                   </button>
                 </div>
-              </div>
-            </div>
-
-            <div className="col-lg-9">
-              <div className="account-container">
                 {/* Content for "Settings" */}
                 {activeTab === "Settings" && (
                   <div className="account-settings-left">
@@ -141,11 +137,11 @@ export default function Dashboard() {
 
                 {/* Placeholder for other tabs */}
                 {activeTab === "Payment Methods" && (
-                  <div>{/* Your "Payment Methods" content here */}</div>
+                  <div>{}</div>
                 )}
 
                 {activeTab === "Saved Vehicles" && (
-                  <div>{/* Your "Saved Vehicles" content here */}</div>
+                  <div>{}</div>
                 )}
               </div>
             </div>
