@@ -34,57 +34,84 @@ function SearchPage() {
 
   const handleSearchSubmit = async (location) => {
     try {
-      const geocodeResponse = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=AIzaSyD3q0Mxt9mnz2s3PcSAHez5tJbXvbje8_Y`
-      );
-      const geocodeData = await geocodeResponse.json();
+      let latlng;
 
-      if (geocodeData.results && geocodeData.results.length > 0) {
-        const latlng = geocodeData.results[0].geometry.location;
-        setMapCenter(latlng);
-
-        const BACKEND_ENDPOINT = `http://localhost:4000/api/search?location=${location}`;
-        const parkingResponse = await fetch(BACKEND_ENDPOINT);
-        if (!parkingResponse.ok) {
-          throw new Error(
-            `Server responded with ${parkingResponse.status}: ${parkingResponse.statusText}`
-          );
-        }
-        const parkingData = await parkingResponse.json();
-
-        if (parkingData && parkingData.length > 0) {
-          const spots = parkingData.map((spot) => {
-            const distance = calculateDistance(
-              latlng.lat,
-              latlng.lng,
-              spot.lat,
-              spot.lng
-            );
-
-            return {
-              id: spot.id || Math.random().toString(36).substr(2, 9),
-              name: spot.name,
-              address: spot.location,
-              price: "Not specified",
-              lat: spot.lat,
-              lng: spot.lng,
-              distance: distance.toFixed(2), 
-            };
-          });
-
-          const sortedSpots = [...spots].sort(
-            (a, b) => a.distance - b.distance
-          );
-          setResults(sortedSpots);
-        } else {
-          console.log("No Parking Spots Found");
-        }
+      // Check if the user has provided a location
+      if (location.trim() === "") {
+        // If no location provided, get the user's current location
+        const position = await getCurrentLocation();
+        latlng = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
       } else {
-        console.log("No Geocoding Results Found");
+        // If a location is provided, get its coordinates using Geocoding
+        const geocodeResponse = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=AIzaSyD3q0Mxt9mnz2s3PcSAHez5tJbXvbje8_Y`
+        );
+        const geocodeData = await geocodeResponse.json();
+
+        if (geocodeData.results && geocodeData.results.length > 0) {
+          latlng = geocodeData.results[0].geometry.location;
+        } else {
+          console.log("No Geocoding Results Found");
+          return;
+        }
+      }
+
+      setMapCenter(latlng);
+
+      const BACKEND_ENDPOINT = `http://localhost:4000/api/search?location=${location}`;
+      const parkingResponse = await fetch(BACKEND_ENDPOINT);
+      if (!parkingResponse.ok) {
+        throw new Error(
+          `Server responded with ${parkingResponse.status}: ${parkingResponse.statusText}`
+        );
+      }
+      const parkingData = await parkingResponse.json();
+
+      if (parkingData && parkingData.length > 0) {
+        const spots = parkingData.map((spot) => {
+          const distance = calculateDistance(
+            latlng.lat,
+            latlng.lng,
+            spot.lat,
+            spot.lng
+          );
+
+          return {
+            id: spot.id || Math.random().toString(36).substr(2, 9),
+            name: spot.name,
+            address: spot.location,
+            price: "Not specified",
+            lat: spot.lat,
+            lng: spot.lng,
+            distance: distance.toFixed(2), 
+          };
+        });
+
+        const sortedSpots = [...spots].sort((a, b) => a.distance - b.distance);
+        setResults(sortedSpots);
+      } else {
+        console.log("No Parking Spots Found");
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+  };
+
+  // Function to get the user's current location using the Geolocation API
+  const getCurrentLocation = () => {
+    return new Promise((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => resolve(position),
+          (error) => reject(error)
+        );
+      } else {
+        reject("Geolocation is not supported by this browser.");
+      }
+    });
   };
 
   const handleBookNow = (spot) => {
