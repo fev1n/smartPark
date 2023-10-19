@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -6,12 +7,17 @@ import LoginForm from "./components/login";
 import Dashboard from "./components/dashboard";
 import SearchPage from "./components/search/searchPage.js";
 import SignUpForm from "./components/signup";
+import Navbar from './components/navbar';
+
 import SpotInfo from "./components/spotInfo.js";
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <Router>
+      <Navbar isLoggedIn={isLoggedIn} />
       <Routes>
         <Route path="/" element={<SignUpForm />} />
         <Route path="/login" element={<LoginForm />} />
