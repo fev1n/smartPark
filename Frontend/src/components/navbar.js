@@ -2,6 +2,7 @@ import React from 'react';
 import "../styles/navbar.css";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import bgImg from "../assets/logo2.png"; // Import the image
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate(); // Initialize navigate
@@ -23,8 +24,9 @@ const Navbar = () => {
         </div>
       </div>
       <ul className="nav-list">
-        <li className="nav-item"><a href="/">About</a></li>
-        <li className="nav-item"><a href="/about">Help</a></li>
+      <li className="nav-item"><Link to="/dashboard">Dashboard</Link></li>
+      <li className="nav-item"><Link to="/">About</Link></li>
+      <li className="nav-item"><Link to="/about">Help</Link></li>
       </ul>
     </nav>
   );
