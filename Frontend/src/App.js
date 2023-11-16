@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import React from "react";
+import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Sign from "./components/signup";
 import LoginForm from "./components/login";
@@ -6,6 +8,9 @@ import Dashboard from "./components/dashboard";
 import SearchPage from "./components/search/searchPage.js";
 import SignUpForm from "./components/signup";
 import Navbar from './components/navbar';
+
+import SpotInfo from "./components/spotInfo.js";
+
 
 function App() {
   const [listItems, setListItems] = useState([]);
@@ -29,6 +34,8 @@ function App() {
         <Route path="/signup" element={<Sign />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/spot/:location" element={<SpotInfo />} />
+
       </Routes>
     </Router>
   );
