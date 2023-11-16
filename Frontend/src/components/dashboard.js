@@ -1,3 +1,4 @@
+// Dashboard.js
 import React, { useState, useEffect } from "react";
 import "../styles/dashboard.css";
 import { useLocation, Link } from "react-router-dom";
@@ -133,7 +134,6 @@ export default function Dashboard() {
                           <p>No reservations yet!</p>
                         ) : (
                           <>
-                            
                             <br />
                             {showAllReservations ? (
                               <ul className="reservation-list">
@@ -161,7 +161,7 @@ export default function Dashboard() {
                             <button className="btn btn-danger" onClick={clearReservations}>
                               Clear Reservations
                             </button>
-                         <br></br>
+                            <br />
                             <button className="btn btn-secondary" onClick={toggleAllReservations}>
                               {showAllReservations ? "Hide History" : "Show History"}
                             </button>
@@ -186,17 +186,17 @@ export default function Dashboard() {
 
 function ReservationItem({ reservation }) {
   return (
-    <li className="reservation-item">
-        <div className="reservation-details">
-        <Link to={`/reservationInfo`} className="reservation-link">
+    <ol className="reservation-item">
+      <div className="reservation-details">
+        <Link to={`/reservations/${reservation.reservationId}`} className="reservation-link">
           <p className="reservation-name">{`Reservation #${reservation.spot.id}`}</p>
-          </Link>
-
-          <p className="reservation-name">Spot Name: {reservation.spot.name}</p>
-          <p className="reservation-address">Spot Address: {reservation.spot.address}</p>
-          <p className="reservation-status">Reservation Status: {reservation.status}</p>
-        </div>
-      <br></br>
-    </li>
+        </Link>
+        <p className="reservation-name">Spot Name: {reservation.spot.name}</p>
+        <p className="reservation-address">Spot Address: {reservation.spot.address}</p>
+        <p className="reservation-status">Reservation Status: {reservation.status}</p>
+      </div>
+      <br />
+    </ol>
   );
 }
+

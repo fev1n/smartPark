@@ -9,8 +9,7 @@ import SignUpForm from "./components/signup";
 import Navbar from './components/navbar';
 import ReservationInfo from "./components/reservationInfo.js";
 import SpotInfo from "./components/spotInfo.js";
-
-
+import ReservationInfo2 from './components/reservationInfo2.js'; 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -26,7 +25,7 @@ function App() {
         <Route path="/spot/:location" element={<SpotInfo />} />
         <Route path="/reservationInfo" element={<ReservationInfo />} />
 
-
+        <Route path="/reservations/:id/*" element={<ReservationInfo2 />} />
       </Routes>
     </Router>
   );
