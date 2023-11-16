@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import '../styles/spotInfo.css';
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+// import axios from 'axios';
+import "../styles/spotInfo.css";
 
 function SpotInfo() {
-  const [spotDetails, setSpotDetails] = useState({});
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
+  const [setSpotDetails] = useState({});
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
   const spot = location.state?.spot || {};
 
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    // Your existing calculateDistance logic
+    //calculateDistance logic
   };
 
   const validateInput = () => {
-    // Your existing validateInput logic
+    //validateInput logic
   };
 
   const sendContactInfo = () => {
     if (validateInput()) {
-      alert('Please enter a valid phone number and email.');
+      alert("Please enter a valid phone number and email.");
       return;
     }
-  
-    navigate('/reservationInfo', {
+
+    navigate("/reservationInfo", {
       state: {
         spot,
         price: price,
@@ -38,7 +38,6 @@ function SpotInfo() {
       },
     });
   };
-   
 
   useEffect(() => {
     const fetchSpotDetails = async () => {
@@ -67,7 +66,7 @@ function SpotInfo() {
               id: spotData.id || Math.random().toString(36).substr(2, 9),
               name: spotData.name,
               address: spotData.location,
-              price: 'Not specified',
+              price: "Not specified",
               lat: spotData.lat,
               lng: spotData.lng,
               distance: distance.toFixed(2),
@@ -79,10 +78,10 @@ function SpotInfo() {
           );
           setSpotDetails(sortedSpots);
         } else {
-          console.log('No Parking Spots Found');
+          console.log("No Parking Spots Found");
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -92,7 +91,6 @@ function SpotInfo() {
   useEffect(() => {
     setPrice(Math.floor(Math.random() * 6) + 4);
   }, []);
-
 
   return (
     <div className="account-container">
@@ -105,9 +103,7 @@ function SpotInfo() {
           <p className="spot-detail">
             Distance from the address: {spot.distance} KM
           </p>
-          <p className="spot-detail">
-            Price: ${price}
-          </p>
+          <p className="spot-detail">Price: ${price}</p>
         </div>
       </div>
 
