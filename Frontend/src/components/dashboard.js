@@ -124,13 +124,18 @@ export default function Dashboard() {
                   </div>
                 )}
 
-                {/* Placeholder for other tabs */}
+          
                 {activeTab === "Payment Methods" && (
                   <div>{}</div>
                 )}
 
                 {activeTab === "Saved Vehicles" && (
                   <div>{}</div>
+                  <div></div>
+                )}
+
+                {activeTab === "Saved Vehicles" && (
+                  <div></div>
                 )}
               </div>
             </div>
