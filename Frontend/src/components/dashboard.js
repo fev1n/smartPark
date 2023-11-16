@@ -125,17 +125,8 @@ export default function Dashboard() {
                 )}
 
           
-                {activeTab === "Payment Methods" && (
+                 {activeTab === "Saved Vehicles" && (
                   <div>{}</div>
-                )}
-
-                {activeTab === "Saved Vehicles" && (
-                  <div>{}</div>
-                  <div></div>
-                )}
-
-                {activeTab === "Saved Vehicles" && (
-                  <div></div>
                 )}
               </div>
             </div>
