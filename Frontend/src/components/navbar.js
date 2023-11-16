@@ -1,33 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../styles/navbar.css";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import bgImg from "../assets/logo2.png"; // Import the image
+import logoImage from '../assets/logo2.png';
+import { useNavigate } from 'react-router-dom';
+import Notification from '../components/Notification'
+import { Link } from "react-router-dom";
+function Navbar() {
+  const [isNavbarActive, setNavbarActive] = useState(false);
+  const [isNotificationActive, setNotificationActive] = useState(false);
+  const [isLoginSuccess, setIsLoginSuccess] = useState(false);
+  const toggleNavbar = () => {
+    setNavbarActive(!isNavbarActive);
+  };
 
-const Navbar = () => {
-  const navigate = useNavigate(); // Initialize navigate
+  const toggleNotification = () => {
+    setNotificationActive(!isNotificationActive);
+  };
 
+  const navigate = useNavigate();
   const handleSearchRedirect = () => {
     navigate("/search");
   };
-
+  
+  const listItems = [
+   
+    {
+      
+      list: [
+        {
+          type: isLoginSuccess ? "Logout" : "Login",
+          content: isLoginSuccess ? "Logout Successful" : "Login Successful",
+        },
+      ],
+    },
+   
+    
+  ];
   return (
-    <nav className="navbar">
-      <div className="left-section">
-        <div className="logo">
-          <img src={bgImg} alt="logo" width={75} height={75} /> 
-        </div>
-        <div className="search-bar">
-          <button className="btn search-btn" onClick={handleSearchRedirect}>
-            Search for a spot
-          </button>
-        </div>
+    <header>
+      <div className="logo">
+        <img src={logoImage} alt="Logo" />
       </div>
-      <ul className="nav-list">
-        <li className="nav-item"><a href="/">About</a></li>
-        <li className="nav-item"><a href="/about">Help</a></li>
-      </ul>
-    </nav>
+      <div className="search-bar">
+        <button className="btn search-btn" onClick={handleSearchRedirect}>
+          Search for a spot
+        </button>
+      </div>
+      <div className='not'>
+      <Notification listItems={listItems} /></div>
+      <div className={`navbar ${isNavbarActive ? 'active' : ''}`} >
+        <ul>
+          
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/Help">Help</Link></li>
+        
+        </ul>
+        
+      </div>
+      
+      
+      <div className="hamburger" onClick={toggleNavbar}>
+        <div className="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
+      </div>
+    </header>
   );
-};
+}
 
 export default Navbar;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/dashboard.css";
 import { useLocation, Link, useNavigate } from "react-router-dom";
+import SavedVehiclesTab from "../components/SavedVehiclesPage";
 
 export default function Dashboard() {
   const location = useLocation();
@@ -28,12 +29,7 @@ export default function Dashboard() {
   };
 
   const handleTabClick = (tabName) => {
-    setActiveTab(tabName);
-    if (tabName === "Payment Methods") {
-      window.alert("Contact an administrator to add a payment method");
-    } else if (tabName === "Saved Vehicles") {
-      window.alert("Contact an administrator to add a vehicle");
-    }
+    
   };
 
   return (
@@ -70,14 +66,7 @@ export default function Dashboard() {
                   >
                     Settings
                   </p>
-                  <p
-                    className={`tab ${
-                      activeTab === "Payment Methods" && "active"
-                    }`}
-                    onClick={() => handleTabClick("Payment Methods")}
-                  >
-                    Payment Methods
-                  </p>
+                 
                   <p
                     className={`tab ${
                       activeTab === "Saved Vehicles" && "active"
@@ -135,14 +124,9 @@ export default function Dashboard() {
                   </div>
                 )}
 
-                {/* Placeholder for other tabs */}
-                {activeTab === "Payment Methods" && (
-                  <div>{}</div>
-                )}
+              
 
-                {activeTab === "Saved Vehicles" && (
-                  <div>{}</div>
-                )}
+                {activeTab === "Saved Vehicles" && <SavedVehiclesTab />}
               </div>
             </div>
           </div>

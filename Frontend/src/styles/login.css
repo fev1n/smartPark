@@ -11,7 +11,9 @@ body {
   background: #f0f0f2;
   background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
 }
-
+p{
+  color: black;
+}
 .App {
   display: flex;
   justify-content: center;

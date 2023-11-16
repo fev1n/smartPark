@@ -7,7 +7,7 @@
 
 /* Body styles */
 body {
-  background: #f0f0f2;
+
   background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
 }
 /* Password container styles */
@@ -107,7 +107,9 @@ body {
   max-height: 100%;
   display: block; 
 }
-
+p{
+  color: black;
+}
 /* Media query for screens wider than 860px */
 @media screen and (min-width: 860px) {
   /* Show the image for larger screens */
