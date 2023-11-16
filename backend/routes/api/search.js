@@ -9,11 +9,6 @@ router.get("/", async (req, res) => {
     const googleMapsAPIKey = "AIzaSyD3q0Mxt9mnz2s3PcSAHez5tJbXvbje8_Y";
 
     const googleMapsAPIURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=parking+${location}&key=${googleMapsAPIKey}`;
-    // https://maps.googleapis.com/maps/api/place/textsearch/json?query=parking+${location}&key=${googleMapsAPIKey}
-
-    //   https://maps.googleapis.com/maps/api/place/textsearch/json?query=parking+CNTower&key=AIzaSyD3q0Mxt9mnz2s3PcSAHez5tJbXvbje8_Y
-
-    // https://localhost:3000/search/maps/api/place/textsearch/json?query=parking{location}&key=AIzaSyD3q0Mxt9mnz2s3PcSAHez5tJbXvbje8_Y
 
     const response = await axios.get(googleMapsAPIURL);
 

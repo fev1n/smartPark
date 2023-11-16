@@ -6,6 +6,7 @@ const db = require("./config/key").MONGODB_URI;
 const passport = require("passport");
 const users = require("./routes/api/user");
 const search = require("./routes/api/search");
+const payment = require("./routes/api/payment");
 const cors = require("cors");
 
 const app = express();
@@ -39,6 +40,8 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 
 app.use("/api/search", search);
+
+app.use("/api/payment", payment);
 
 // Server listening check
 app.listen(process.env.PORT, () =>

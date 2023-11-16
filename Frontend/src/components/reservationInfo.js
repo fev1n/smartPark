@@ -1,33 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
-import '../styles/reservationInfo.css';
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { v4 as uuidv4 } from "uuid";
+import "../styles/reservationInfo.css";
 
 function ReservationTracking() {
-  const [status, setStatus] = useState('Pending');
+  const [status, setStatus] = useState("Pending");
 
   const location = useLocation();
-  const { spot, enteredName, enteredPhoneNumber, enteredEmail, price } = location.state || {};
-  const reservationId = uuidv4(); 
+  const { spot, enteredName, enteredPhoneNumber, enteredEmail, price } =
+    location.state || {};
+  const reservationId = uuidv4();
+  const navigate = useNavigate();
 
   const cancelReservation = () => {
-    const updatedStatus = 'Cancelled';
+    const updatedStatus = "Cancelled";
     setStatus(updatedStatus);
-    alert('Reservation Cancelled!');
+    alert("Reservation Cancelled!");
 
-    const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
-    const updatedReservations = storedReservations.map(reservation => {
+    const storedReservations =
+      JSON.parse(localStorage.getItem("reservations")) || [];
+    const updatedReservations = storedReservations.map((reservation) => {
       if (reservation.spot.id === spot.id) {
         return { ...reservation, status: updatedStatus };
       }
       return reservation;
     });
-    localStorage.setItem('reservations', JSON.stringify(updatedReservations));
+    localStorage.setItem("reservations", JSON.stringify(updatedReservations));
   };
 
   useEffect(() => {
-    const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
-    const existingReservation = storedReservations.find(reservation => reservation.spot.id === spot.id);
+    const storedReservations =
+      JSON.parse(localStorage.getItem("reservations")) || [];
+    const existingReservation = storedReservations.find(
+      (reservation) => reservation.spot.id === spot.id
+    );
 
     if (existingReservation) {
       setStatus(existingReservation.status);
@@ -43,9 +50,20 @@ function ReservationTracking() {
       };
 
       const updatedReservations = [...storedReservations, reservationData];
-      localStorage.setItem('reservations', JSON.stringify(updatedReservations));
+      localStorage.setItem("reservations", JSON.stringify(updatedReservations));
     }
-  }, [reservationId, spot, enteredName, enteredPhoneNumber, enteredEmail, price, status]);
+
+    navigate("/payment");
+  }, [
+    reservationId,
+    spot,
+    enteredName,
+    enteredPhoneNumber,
+    enteredEmail,
+    price,
+    status,
+    navigate,
+  ]);
 
   return (
     <div className="reservation-tracking">
@@ -57,7 +75,9 @@ function ReservationTracking() {
             <h3>Parking Information</h3>
             <p className="spot-detail">Name: {spot.name}</p>
             <p className="spot-detail">Address: {spot.address}</p>
-            <p className="spot-detail">Distance from the address: {spot.distance} KM</p>
+            <p className="spot-detail">
+              Distance from the address: {spot.distance} KM
+            </p>
             <p className="spot-detail">Price: ${price}</p>
           </div>
           <div className="info-section">

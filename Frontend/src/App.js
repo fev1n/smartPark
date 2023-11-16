@@ -6,13 +6,13 @@ import LoginForm from "./components/login";
 import Dashboard from "./components/dashboard";
 import SearchPage from "./components/search/searchPage.js";
 import SignUpForm from "./components/signup";
-import Navbar from './components/navbar';
+import Navbar from "./components/navbar";
 import ReservationInfo from "./components/reservationInfo.js";
 import SpotInfo from "./components/spotInfo.js";
-
+import Payment from "./components/paymentPage.js";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn] = useState(false);
 
   return (
     <Router>
@@ -24,9 +24,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/spot/:location" element={<SpotInfo />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="/reservationInfo" element={<ReservationInfo />} />
-
-
       </Routes>
     </Router>
   );
