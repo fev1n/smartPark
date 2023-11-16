@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import React from "react";
+
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Sign from "./components/signup";
@@ -8,6 +8,8 @@ import Dashboard from "./components/dashboard";
 import SearchPage from "./components/search/searchPage.js";
 import SignUpForm from "./components/signup";
 import Navbar from './components/navbar';
+import AboutPage from "./components/about.js";
+import HelpPage from "./components/Help.js";
 
 import SpotInfo from "./components/spotInfo.js";
 
@@ -35,6 +37,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/spot/:location" element={<SpotInfo />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/Help" element={<HelpPage />}  />
 
       </Routes>
     </Router>

@@ -8,6 +8,7 @@
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
+    background-color: #032d43;
   }
   
   .panel-heading {
@@ -17,6 +18,7 @@
     border-bottom: 1px solid #ddd;
     border-radius: 8px 8px 0 0;
   }
+  
   
   .panel-content {
     padding: 20px;

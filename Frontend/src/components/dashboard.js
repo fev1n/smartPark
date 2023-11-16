@@ -29,7 +29,7 @@ export default function Dashboard() {
   };
 
   const handleTabClick = (tabName) => {
-    
+    setActiveTab(tabName);
   };
 
   return (
@@ -124,10 +124,9 @@ export default function Dashboard() {
                   </div>
                 )}
 
-          
-                 {activeTab === "Saved Vehicles" && (
-                  <div>{}</div>
-                )}
+                
+
+                {activeTab === "Saved Vehicles" && <SavedVehiclesTab />}
               </div>
             </div>
           </div>

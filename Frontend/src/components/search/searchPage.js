@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import SearchBar from "./searchBar.js";
 import SpotList from "./spotList.js";
-import { useNavigate } from "react-router-dom";
+
 import { useNavigate, Link } from "react-router-dom";
 import "../../styles/SearchPage.css";
 import {
