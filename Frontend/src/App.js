@@ -10,7 +10,7 @@ import Navbar from "./components/navbar";
 import ReservationInfo from "./components/reservationInfo.js";
 import SpotInfo from "./components/spotInfo.js";
 import Payment from "./components/paymentPage.js";
-
+import ReservationInfo2 from './components/reservationInfo2.js'; 
 function App() {
   const [isLoggedIn] = useState(false);
 
@@ -26,6 +26,7 @@ function App() {
         <Route path="/spot/:location" element={<SpotInfo />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/reservationInfo" element={<ReservationInfo />} />
+        <Route path="/reservations/:id/*" element={<ReservationInfo2 />} />
       </Routes>
     </Router>
   );

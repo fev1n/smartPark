@@ -29,6 +29,23 @@ function ReservationTracking() {
     localStorage.setItem("reservations", JSON.stringify(updatedReservations));
   };
 
+
+  const completeReservation = () => {
+    const updatedStatus = 'Completed';
+    setStatus(updatedStatus);
+    alert('You have completed the reservation!');
+
+    const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+    const updatedReservations = storedReservations.map(reservation => {
+      if (reservation.spot.id === spot.id) {
+        return { ...reservation, status: updatedStatus };
+      }
+      return reservation;
+    });
+    localStorage.setItem('reservations', JSON.stringify(updatedReservations));
+  };
+
+
   useEffect(() => {
     const storedReservations =
       JSON.parse(localStorage.getItem("reservations")) || [];
@@ -95,6 +112,9 @@ function ReservationTracking() {
             <p>Status: {status}</p>
           </div>
           <br></br>
+          <button onClick={completeReservation} className="btn btn-danger">
+            Complete Reservation
+          </button>
           <button onClick={cancelReservation} className="btn btn-danger">
             Cancel Reservation
           </button>
