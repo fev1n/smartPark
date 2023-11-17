@@ -1,30 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import axios from 'axios';
-import '../styles/spotInfo.css';
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+// import axios from 'axios';
+import "../styles/spotInfo.css";
 
 function SpotInfo() {
-  const [spotDetails, setSpotDetails] = useState({});
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const [setSpotDetails] = useState({});
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
 
+  const navigate = useNavigate();
   const location = useLocation();
   const spot = location.state?.spot || {};
 
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    // Your calculateDistance function code...
+    //calculateDistance logic
   };
 
   const validateInput = () => {
-    // Your validateInput function code...
+    //validateInput logic
+  };
+
+  const sendContactInfo = () => {
+    if (validateInput()) {
+      alert("Please enter a valid phone number and email.");
+      return;
+    }
+
+    navigate("/reservationInfo", {
+      state: {
+        spot,
+        price: price,
+        enteredName: name,
+        enteredPhoneNumber: phoneNumber,
+        enteredEmail: email,
+      },
+    });
   };
 
   useEffect(() => {
     const fetchSpotDetails = async () => {
       try {
-        // Use the 'spot' variable here to fetch spot details
-        // For example:
         const BACKEND_ENDPOINT = `http://localhost:4000/api/search?location=${encodeURIComponent(
           spot.address
         )}`;
@@ -49,7 +66,7 @@ function SpotInfo() {
               id: spotData.id || Math.random().toString(36).substr(2, 9),
               name: spotData.name,
               address: spotData.location,
-              price: 'Not specified',
+              price: "Not specified",
               lat: spotData.lat,
               lng: spotData.lng,
               distance: distance.toFixed(2),
@@ -61,36 +78,19 @@ function SpotInfo() {
           );
           setSpotDetails(sortedSpots);
         } else {
-          console.log('No Parking Spots Found');
+          console.log("No Parking Spots Found");
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchSpotDetails();
   }, [spot]);
 
-  const sendContactInfo = async () => {
-    if (!validateInput()) {
-      alert('Please enter a valid phone number and email.');
-      return;
-    }
-
-    try {
-      const response = await axios.post('/sendContactInfo', {
-        phoneNumber,
-        email,
-      });
-      if (response.data.success) {
-        alert('Code sent successfully!');
-      } else {
-        alert('Failed to send code. Please try again.');
-      }
-    } catch (error) {
-      alert('There was an error connecting to the server. Please try again.');
-    }
-  };
+  useEffect(() => {
+    setPrice(Math.floor(Math.random() * 6) + 4);
+  }, []);
 
   return (
     <div className="account-container">
@@ -103,9 +103,7 @@ function SpotInfo() {
           <p className="spot-detail">
             Distance from the address: {spot.distance} KM
           </p>
-          <p className="spot-detail">
-            Price: ${Math.floor(Math.random() * 6) + 4}
-          </p>
+          <p className="spot-detail">Price: ${price}</p>
         </div>
       </div>
 
@@ -119,7 +117,7 @@ function SpotInfo() {
             onChange={(e) => setName(e.target.value)}
             className="form-control"
           />
-<br></br>
+          <br></br>
 
           <label className="input-label">Phone Number</label>
           <input
@@ -139,7 +137,7 @@ function SpotInfo() {
           />
         </div>
         <button onClick={sendContactInfo} className="btn btn-primary">
-          Send Code
+          Confirm Booking
         </button>
       </div>
     </div>

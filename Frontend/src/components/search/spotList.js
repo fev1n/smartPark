@@ -1,11 +1,10 @@
-
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+// import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/spotList.css";
 
 function SpotList({ spots }) {
   const navigate = useNavigate();
-  
+
   const handleBookNow = (spot) => {
     console.log(spot);
     navigate(`/spot/${spot.address}`, { state: { spot } });
@@ -20,10 +19,7 @@ function SpotList({ spots }) {
           <h4>{spot.name}</h4>
           <p>{spot.address}</p>
           <p>{spot.distance} KM</p>
-          <button
-            onClick={() => handleBookNow(spot)}
-            className="book-now-btn"
-          >
+          <button onClick={() => handleBookNow(spot)} className="book-now-btn">
             Book Now
           </button>
         </div>

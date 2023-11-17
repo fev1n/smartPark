@@ -6,7 +6,6 @@ function BookingPage() {
   const { spot } = location.state || {};
 
   if (!spot) {
-    // Handle the case where there is no spot information
     return <div>No spot information available</div>;
   }
 
@@ -16,7 +15,6 @@ function BookingPage() {
       <p>Name: {spot.name}</p>
       <p>Address: {spot.address}</p>
       <p>Distance: {spot.distance}km</p>
-      {/* Add additional spot details as needed */}
       <button>Confirm Booking</button>
     </div>
   );

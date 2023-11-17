@@ -7,6 +7,7 @@ const passport = require("passport");
 const users = require("./routes/api/user");
 const helpRouter = require('./routes/api/help');
 const search = require("./routes/api/search");
+const payment = require("./routes/api/payment");
 const cors = require("cors");
 const savedVehiclesRoute = require('./routes/api/savedVehicles');
 
@@ -41,6 +42,8 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 
 app.use("/api/search", search);
+
+app.use("/api/payment", payment);
 
 app.use("/api/help", helpRouter);
 app.use('/api/savedVehicles', savedVehiclesRoute);

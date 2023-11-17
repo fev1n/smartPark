@@ -12,7 +12,7 @@ import {
 } from "@react-google-maps/api";
 
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
-  const R = 6371; 
+  const R = 6371;
   const dLat = (lat2 - lat1) * (Math.PI / 180);
   const dLon = (lon2 - lon1) * (Math.PI / 180);
   const a =
@@ -22,7 +22,7 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
       Math.sin(dLon / 2) *
       Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  const distance = R * c; 
+  const distance = R * c;
   return distance;
 };
 
@@ -87,7 +87,7 @@ function SearchPage() {
             price: "Not specified",
             lat: spot.lat,
             lng: spot.lng,
-            distance: distance.toFixed(2), 
+            distance: distance.toFixed(2),
           };
         });
 
@@ -174,7 +174,7 @@ function SearchPage() {
           ))}
         </GoogleMap>
       </LoadScript>
-      <SpotList spots={results} onBookNow={handleBookNow}/>
+      <SpotList spots={results} onBookNow={handleBookNow} />
     </div>
   );
 }

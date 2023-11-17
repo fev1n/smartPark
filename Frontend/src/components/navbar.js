@@ -1,22 +1,11 @@
 import React, { useState } from 'react';
 import "../styles/navbar.css";
-import logoImage from '../assets/logo2.png';
-import { useNavigate } from 'react-router-dom';
-import Notification from '../components/Notification'
-import { Link } from "react-router-dom";
-function Navbar() {
-  const [isNavbarActive, setNavbarActive] = useState(false);
-  const [isNotificationActive, setNotificationActive] = useState(false);
-  const [isLoginSuccess, setIsLoginSuccess] = useState(false);
-  const toggleNavbar = () => {
-    setNavbarActive(!isNavbarActive);
-  };
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import bgImg from "../assets/logo2.png"; // Import the image
 
-  const toggleNotification = () => {
-    setNotificationActive(!isNotificationActive);
-  };
+const Navbar = () => {
+  const navigate = useNavigate(); // Initialize navigate
 
-  const navigate = useNavigate();
   const handleSearchRedirect = () => {
     navigate("/search");
   };
@@ -63,7 +52,11 @@ function Navbar() {
         <div className="line"></div>
         <div className="line"></div>
       </div>
-    </header>
+      <ul className="nav-list">
+        <li className="nav-item"><a href="/">About</a></li>
+        <li className="nav-item"><a href="/about">Help</a></li>
+      </ul>
+    </nav>
   );
 }
 

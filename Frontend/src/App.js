@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Sign from "./components/signup";
@@ -12,8 +11,8 @@ import AboutPage from "./components/about.js";
 import HelpPage from "./components/Help.js";
 
 import SpotInfo from "./components/spotInfo.js";
-
-
+import Payment from "./components/paymentPage.js";
+import ReservationInfo2 from './components/reservationInfo2.js'; 
 function App() {
   const [listItems, setListItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Remove the eslint-disable-next-line comment
@@ -40,6 +39,9 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/Help" element={<HelpPage />}  />
 
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/reservationInfo" element={<ReservationInfo />} />
+        <Route path="/reservations/:id/*" element={<ReservationInfo2 />} />
       </Routes>
     </Router>
   );
