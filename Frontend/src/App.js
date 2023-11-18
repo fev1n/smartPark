@@ -10,7 +10,7 @@ import Navbar from "./components/navbar";
 import ReservationInfo from "./components/reservationInfo.js";
 import SpotInfo from "./components/spotInfo.js";
 import Payment from "./components/paymentPage.js";
-import ReservationInfo2 from './components/reservationInfo2.js'; 
+import ReservationInfo2 from "./components/reservationInfo2.js";
 import AboutPage from "./components/about.js";
 import HelpPage from "./components/Help.js";
 function App() {
@@ -27,7 +27,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/spot/:location" element={<SpotInfo />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/Help" element={<HelpPage />}  />
+        <Route path="/Help" element={<HelpPage />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/reservationInfo" element={<ReservationInfo />} />
         <Route path="/reservations/:id/*" element={<ReservationInfo2 />} />

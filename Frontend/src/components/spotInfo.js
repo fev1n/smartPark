@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 // import axios from 'axios';
 import "../styles/spotInfo.css";
+import PaymentPage from "./paymentPage.js";
 
 function SpotInfo() {
   const [setSpotDetails] = useState({});
@@ -27,7 +28,6 @@ function SpotInfo() {
       alert("Please enter a valid phone number and email.");
       return;
     }
-
     navigate("/reservationInfo", {
       state: {
         spot,
@@ -93,7 +93,7 @@ function SpotInfo() {
   }, []);
 
   return (
-    <div className="account-containe">
+    <div className="account-container">
       <h2 className="dashboard-title">Spot Information</h2>
       <div className="panel1">
         <div className="panel-heading1">Spot Details</div>
@@ -137,8 +137,9 @@ function SpotInfo() {
           />
         </div>
         <button onClick={sendContactInfo} className="btn btn-primary">
-          Confirm Booking
+          Proceed to Payment
         </button>
+        {/* <PaymentPage /> */}
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ export default function Form() {
 
   const navigate = useNavigate();
   const [isLoginSuccess, setIsLoginSuccess] = useState(false);
-  const [loginError, setLoginError] = useState(""); 
+  const [loginError, setLoginError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   useEffect(() => {
     let timer;
@@ -59,12 +59,11 @@ export default function Form() {
     }
   }
 
- 
   const col1Classes = classNames("col-1", {
-    "responsive-col-1": window.innerWidth <= 768, 
+    "responsive-col-1": window.innerWidth <= 768,
   });
   const col2Classes = classNames("col-2", {
-    "responsive-col-2": window.innerWidth <= 768, 
+    "responsive-col-2": window.innerWidth <= 768,
   });
 
   return (
@@ -90,40 +89,37 @@ export default function Form() {
                 },
               })}
               placeholder="email"
-              
             />
             <span className="error-message">{errors.email?.message}</span>
             <div className="password-container">
-            <input
-              type={showPassword ? "text" : "password"}
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 8,
-                  message: "Password must be at least 8 characters",
-                },
-                validate: async (value) => {
-                  const emailValue = document.getElementById("email").value;
-                  if (value === emailValue) {
-                    return "Password should not match the email";
-                  }
-                  return true;
-                },
-              })}
-              placeholder="Password"
-            />
-            <span className="error-message">{errors.password?.message}</span>
-            <button
+              <input
+                type={showPassword ? "text" : "password"}
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters",
+                  },
+                  validate: async (value) => {
+                    const emailValue = document.getElementById("email").value;
+                    if (value === emailValue) {
+                      return "Password should not match the email";
+                    }
+                    return true;
+                  },
+                })}
+                placeholder="Password"
+              />
+              <span className="error-message">{errors.password?.message}</span>
+              <button
                 type="button"
                 className="password-toggle"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? "Hide" : "Show"}
               </button>
-              </div>
-            {loginError && (
-              <p className="login-error-message">{loginError}</p>
-            )}
+            </div>
+            {loginError && <p className="login-error-message">{loginError}</p>}
 
             <button className="btn">Login</button>
             <p>
@@ -141,7 +137,7 @@ export default function Form() {
           isLoginSuccess
             ? [
                 {
-                 list: [
+                  list: [
                     {
                       type: "Login",
                       content: "Login Successful",
@@ -151,7 +147,7 @@ export default function Form() {
               ]
             : []
         }
-      /> 
+      />
     </section>
   );
 }
