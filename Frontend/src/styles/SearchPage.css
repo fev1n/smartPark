@@ -119,10 +119,12 @@
   justify-content: space-around;
   margin-top: 20px;
   display: flex;
+  color: black;
   flex-direction: column;
 }
 
 .spot-tile {
+  color: black;
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
