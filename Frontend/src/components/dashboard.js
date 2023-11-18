@@ -5,7 +5,8 @@ import { useLocation, Link } from "react-router-dom";
 
 export default function Dashboard() {
   const location = useLocation();
-  const emailFromLogin = location.state?.email || localStorage.getItem("userEmail") || "Guest";
+  const emailFromLogin =
+    location.state?.email || localStorage.getItem("userEmail") || "Guest";
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState("Settings");
   const [user, setUser] = useState({ email: null });
@@ -20,7 +21,8 @@ export default function Dashboard() {
       setUser({ email: emailFromLogin });
     }, 100);
 
-    const storedReservations = JSON.parse(localStorage.getItem("reservations")) || [];
+    const storedReservations =
+      JSON.parse(localStorage.getItem("reservations")) || [];
     setReservations(storedReservations.reverse());
   }, [emailFromLogin]);
 
@@ -81,18 +83,20 @@ export default function Dashboard() {
                   >
                     Settings
                   </p>
-                  <p
+                  {/* <p
                     className={`tab ${activeTab === "Payment Methods" && "active"}`}
                     onClick={() => handleTabClick("Payment Methods")}
                   >
                     Payment Methods
-                  </p>
-                  <p
-                    className={`tab ${activeTab === "Saved Vehicles" && "active"}`}
+                  </p> */}
+                  {/* <p
+                    className={`tab ${
+                      activeTab === "Saved Vehicles" && "active"
+                    }`}
                     onClick={() => handleTabClick("Saved Vehicles")}
                   >
                     Saved Vehicles
-                  </p>
+                  </p> */}
                   <button className="btn">
                     <Link to="/login" className="link">
                       Sign out
@@ -109,12 +113,18 @@ export default function Dashboard() {
                         <div className="account-email-wrapper">
                           <p>{user.email}</p>
                         </div>
-                        <button className="btn-link" onClick={handleEmailChangeAlert}>
+                        <button
+                          className="btn-link"
+                          onClick={handleEmailChangeAlert}
+                        >
                           Change
                         </button>
                         <br />
                         <h2>Password</h2>
-                        <button className="btn-link" onClick={handlePasswordChangeAlert}>
+                        <button
+                          className="btn-link"
+                          onClick={handlePasswordChangeAlert}
+                        >
                           Change
                         </button>
                       </div>
@@ -138,32 +148,55 @@ export default function Dashboard() {
                             {showAllReservations ? (
                               <ul className="reservation-list">
                                 {reservations.map((reservation, index) => (
-                                  <ReservationItem key={index} reservation={reservation} />
+                                  <ReservationItem
+                                    key={index}
+                                    reservation={reservation}
+                                  />
                                 ))}
                               </ul>
                             ) : (
                               <ul className="reservation-list">
-                                {reservations.slice(0, 5).map((reservation, index) => (
-                                  <ReservationItem key={index} reservation={reservation} />
-                                ))}
+                                {reservations
+                                  .slice(0, 5)
+                                  .map((reservation, index) => (
+                                    <ReservationItem
+                                      key={index}
+                                      reservation={reservation}
+                                    />
+                                  ))}
                               </ul>
                             )}
-                            {reservations.length > 5 && !showAllReservations && (
-                              <button className="btn btn-secondary" onClick={toggleAllReservations}>
-                                Show More
-                              </button>
-                            )}
+                            {reservations.length > 5 &&
+                              !showAllReservations && (
+                                <button
+                                  className="btn btn-secondary"
+                                  onClick={toggleAllReservations}
+                                >
+                                  Show More
+                                </button>
+                              )}
                             {reservations.length > 5 && showAllReservations && (
-                              <button className="btn btn-secondary" onClick={toggleAllReservations}>
+                              <button
+                                className="btn btn-secondary"
+                                onClick={toggleAllReservations}
+                              >
                                 Show Less
                               </button>
                             )}
-                            <button className="btn btn-danger" onClick={clearReservations}>
+                            <button
+                              className="btn btn-danger"
+                              onClick={clearReservations}
+                            >
                               Clear Reservations
                             </button>
                             <br />
-                            <button className="btn btn-secondary" onClick={toggleAllReservations}>
-                              {showAllReservations ? "Hide History" : "Show History"}
+                            <button
+                              className="btn btn-secondary"
+                              onClick={toggleAllReservations}
+                            >
+                              {showAllReservations
+                                ? "Hide History"
+                                : "Show History"}
                             </button>
                           </>
                         )}
@@ -188,15 +221,21 @@ function ReservationItem({ reservation }) {
   return (
     <ol className="reservation-item">
       <div className="reservation-details">
-        <Link to={`/reservations/${reservation.reservationId}`} className="reservation-link">
+        <Link
+          to={`/reservations/${reservation.reservationId}`}
+          className="reservation-link"
+        >
           <p className="reservation-name">{`Reservation #${reservation.spot.id}`}</p>
         </Link>
         <p className="reservation-name">Spot Name: {reservation.spot.name}</p>
-        <p className="reservation-address">Spot Address: {reservation.spot.address}</p>
-        <p className="reservation-status">Reservation Status: {reservation.status}</p>
+        <p className="reservation-address">
+          Spot Address: {reservation.spot.address}
+        </p>
+        <p className="reservation-status">
+          Reservation Status: {reservation.status}
+        </p>
       </div>
       <br />
     </ol>
   );
 }
-

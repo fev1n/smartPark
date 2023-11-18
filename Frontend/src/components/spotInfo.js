@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 // import axios from 'axios';
 import "../styles/spotInfo.css";
+import PaymentPage from "./paymentPage.js";
 
 function SpotInfo() {
   const [setSpotDetails] = useState({});
@@ -27,7 +28,6 @@ function SpotInfo() {
       alert("Please enter a valid phone number and email.");
       return;
     }
-
     navigate("/reservationInfo", {
       state: {
         spot,
@@ -93,54 +93,57 @@ function SpotInfo() {
   }, []);
 
   return (
-    <div className="account-container">
-      <h2 className="dashboard-title">Spot Information</h2>
-      <div className="panel">
-        <div className="panel-heading">Spot Details</div>
-        <div className="spot-details-content">
-          <p className="spot-detail">Name: {spot.name}</p>
-          <p className="spot-detail">Address: {spot.address}</p>
-          <p className="spot-detail">
-            Distance from the address: {spot.distance} KM
-          </p>
-          <p className="spot-detail">Price: ${price}</p>
+    <>
+      <div className="account-container">
+        <h2 className="dashboard-title">Spot Information</h2>
+        <div className="panel">
+          <div className="panel-heading">Spot Details</div>
+          <div className="spot-details-content">
+            <p className="spot-detail">Name: {spot.name}</p>
+            <p className="spot-detail">Address: {spot.address}</p>
+            <p className="spot-detail">
+              Distance from the address: {spot.distance} KM
+            </p>
+            <p className="spot-detail">Price: ${price}</p>
+          </div>
+        </div>
+
+        <div className="panel">
+          <div className="panel-heading">Your Information</div>
+          <div className="your-information-content">
+            <label className="input-label">Full Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="form-control"
+            />
+            <br></br>
+
+            <label className="input-label">Phone Number</label>
+            <input
+              type="tel"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              className="form-control"
+            />
+            <br></br>
+
+            <label className="input-label">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="form-control"
+            />
+          </div>
+          <button onClick={sendContactInfo} className="btn btn-primary">
+            Proceed to Payment
+          </button>
+          {/* <PaymentPage /> */}
         </div>
       </div>
-
-      <div className="panel">
-        <div className="panel-heading">Your Information</div>
-        <div className="your-information-content">
-          <label className="input-label">Full Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="form-control"
-          />
-          <br></br>
-
-          <label className="input-label">Phone Number</label>
-          <input
-            type="tel"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            className="form-control"
-          />
-          <br></br>
-
-          <label className="input-label">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="form-control"
-          />
-        </div>
-        <button onClick={sendContactInfo} className="btn btn-primary">
-          Confirm Booking
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 

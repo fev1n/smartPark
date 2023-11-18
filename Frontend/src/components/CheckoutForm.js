@@ -1,6 +1,7 @@
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
+import "../styles/checkoutForm.css";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -25,7 +26,8 @@ export default function CheckoutForm() {
       confirmParams: {
         // Make sure to change this to your payment completion page
 
-        return_url: `${window.location.origin}/completion`,
+        // return_url: `${window.location.origin}/reservationInfo`,
+        return_url: `${window.location.origin}/dashboard`,
       },
     });
 

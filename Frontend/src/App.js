@@ -10,7 +10,7 @@ import Navbar from "./components/navbar";
 import ReservationInfo from "./components/reservationInfo.js";
 import SpotInfo from "./components/spotInfo.js";
 import Payment from "./components/paymentPage.js";
-import ReservationInfo2 from './components/reservationInfo2.js'; 
+import ReservationInfo2 from "./components/reservationInfo2.js";
 function App() {
   const [isLoggedIn] = useState(false);
 
