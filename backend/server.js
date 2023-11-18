@@ -5,9 +5,11 @@ const mongoose = require("mongoose");
 const db = require("./config/key").MONGODB_URI;
 const passport = require("passport");
 const users = require("./routes/api/user");
+const helpRouter = require('./routes/api/help');
 const search = require("./routes/api/search");
 const payment = require("./routes/api/payment");
 const cors = require("cors");
+const savedVehiclesRoute = require('./routes/api/savedVehicles');
 
 const app = express();
 
@@ -42,7 +44,8 @@ app.use("/api/users", users);
 app.use("/api/search", search);
 
 app.use("/api/payment", payment);
-
+app.use("/api/help", helpRouter);
+app.use('/api/savedVehicles', savedVehiclesRoute);
 // Server listening check
 app.listen(process.env.PORT, () =>
   console.log(`Server running on port ${process.env.PORT}!!`)

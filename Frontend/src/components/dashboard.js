@@ -1,7 +1,8 @@
 // Dashboard.js
 import React, { useState, useEffect } from "react";
 import "../styles/dashboard.css";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import SavedVehiclesTab from "../components/SavedVehiclesPage";
 
 export default function Dashboard() {
   const location = useLocation();
@@ -34,11 +35,6 @@ export default function Dashboard() {
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
-    if (tabName === "Payment Methods") {
-      window.alert("Contact an administrator to add a payment method");
-    } else if (tabName === "Saved Vehicles") {
-      window.alert("Contact an administrator to add a vehicle");
-    }
   };
 
   const clearReservations = () => {
@@ -68,27 +64,28 @@ export default function Dashboard() {
           <div className="row">
             <div className="col-lg-3">
               <div className="account-navigation">
-                <div className="admin-links"></div>
+                
+
+                <div className="admin-links">
+                  
+                </div>
               </div>
             </div>
 
             <div className="col-lg-9">
               <div className="account-container">
-                <div className="tabs">
+              <div className="tabs">
                   <p
                     className={`tab ${activeTab === "Settings" && "active"}`}
                     onClick={() => handleTabClick("Settings")}
                   >
                     Settings
                   </p>
+                 
                   <p
-                    className={`tab ${activeTab === "Payment Methods" && "active"}`}
-                    onClick={() => handleTabClick("Payment Methods")}
-                  >
-                    Payment Methods
-                  </p>
-                  <p
-                    className={`tab ${activeTab === "Saved Vehicles" && "active"}`}
+                    className={`tab ${
+                      activeTab === "Saved Vehicles" && "active"
+                    }`}
                     onClick={() => handleTabClick("Saved Vehicles")}
                   >
                     Saved Vehicles
@@ -99,7 +96,7 @@ export default function Dashboard() {
                     </Link>
                   </button>
                 </div>
-
+                {/* Content for "Settings" */}
                 {activeTab === "Settings" && (
                   <div className="account-settings-left">
                     <div className="panel open">
@@ -109,12 +106,18 @@ export default function Dashboard() {
                         <div className="account-email-wrapper">
                           <p>{user.email}</p>
                         </div>
-                        <button className="btn-link" onClick={handleEmailChangeAlert}>
+                        <button
+                          className="btn-link"
+                          onClick={handleEmailChangeAlert}
+                        >
                           Change
                         </button>
                         <br />
                         <h2>Password</h2>
-                        <button className="btn-link" onClick={handlePasswordChangeAlert}>
+                        <button
+                          className="btn-link"
+                          onClick={handlePasswordChangeAlert}
+                        >
                           Change
                         </button>
                       </div>
@@ -172,9 +175,9 @@ export default function Dashboard() {
                   </div>
                 )}
 
-                {activeTab === "Payment Methods" && <div></div>}
+                
 
-                {activeTab === "Saved Vehicles" && <div></div>}
+                {activeTab === "Saved Vehicles" && <SavedVehiclesTab />}
               </div>
             </div>
           </div>

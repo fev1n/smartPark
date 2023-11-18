@@ -56,6 +56,7 @@ export default function Form() {
           <h2>Smart Park</h2>
           <span>Register and enjoy the service</span>
           <form id="form" className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+            
             <input
               type="text"
               {...register("name", {
@@ -64,7 +65,6 @@ export default function Form() {
               placeholder="Name"
             />
             {errors.name && <p className="error">Name is required</p>}
-
             <input
               type="text"
               {...register("email", {
@@ -118,7 +118,7 @@ export default function Form() {
               Sign In
             </button>
             <p>
-              Already have an account? <Link to="/login">Click here to Login</Link>.
+              Already have an account? <Link to="/login">Click here to Login</Link>
             </p>
           </form>
         </div>

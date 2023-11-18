@@ -93,10 +93,10 @@ function SpotInfo() {
   }, []);
 
   return (
-    <div className="account-container">
+    <div className="account-containe">
       <h2 className="dashboard-title">Spot Information</h2>
-      <div className="panel">
-        <div className="panel-heading">Spot Details</div>
+      <div className="panel1">
+        <div className="panel-heading1">Spot Details</div>
         <div className="spot-details-content">
           <p className="spot-detail">Name: {spot.name}</p>
           <p className="spot-detail">Address: {spot.address}</p>
@@ -107,8 +107,8 @@ function SpotInfo() {
         </div>
       </div>
 
-      <div className="panel">
-        <div className="panel-heading">Your Information</div>
+      <div className="panel1">
+        <div className="panel-heading1">Your Information</div>
         <div className="your-information-content">
           <label className="input-label">Full Name</label>
           <input
