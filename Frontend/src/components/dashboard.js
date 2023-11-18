@@ -66,24 +66,20 @@ export default function Dashboard() {
           <div className="row">
             <div className="col-lg-3">
               <div className="account-navigation">
-                
-
-                <div className="admin-links">
-                  
-                </div>
+                <div className="admin-links"></div>
               </div>
             </div>
 
             <div className="col-lg-9">
               <div className="account-container">
-              <div className="tabs">
+                <div className="tabs">
                   <p
                     className={`tab ${activeTab === "Settings" && "active"}`}
                     onClick={() => handleTabClick("Settings")}
                   >
                     Settings
                   </p>
-                 
+
                   <p
                     className={`tab ${
                       activeTab === "Saved Vehicles" && "active"
@@ -91,7 +87,7 @@ export default function Dashboard() {
                     onClick={() => handleTabClick("Saved Vehicles")}
                   >
                     Saved Vehicles
-                  </p> */}
+                  </p>
                   <button className="btn">
                     <Link to="/login" className="link">
                       Sign out
@@ -112,18 +108,10 @@ export default function Dashboard() {
                           className="btn-link"
                           onClick={handleEmailChangeAlert}
                         >
-                        <button
-                          className="btn-link"
-                          onClick={handleEmailChangeAlert}
-                        >
                           Change
                         </button>
                         <br />
                         <h2>Password</h2>
-                        <button
-                          className="btn-link"
-                          onClick={handlePasswordChangeAlert}
-                        >
                         <button
                           className="btn-link"
                           onClick={handlePasswordChangeAlert}
@@ -207,8 +195,6 @@ export default function Dashboard() {
                     </div>
                   </div>
                 )}
-
-                
 
                 {activeTab === "Saved Vehicles" && <SavedVehiclesTab />}
               </div>
