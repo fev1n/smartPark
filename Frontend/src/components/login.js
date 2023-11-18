@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import bgImg from "../assets/img2.jpg";
 import "../styles/login.css";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
-
+import Notification from "../components/Notification";
 export default function Form() {
   const {
     register,
@@ -16,10 +16,21 @@ export default function Form() {
   });
 
   const navigate = useNavigate();
-
+  const [isLoginSuccess, setIsLoginSuccess] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  useEffect(() => {
+    let timer;
+    if (isLoginSuccess) {
+      timer = setTimeout(() => {
+        setIsLoginSuccess(false);
+      }, 2000);
+    }
 
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isLoginSuccess]);
   async function onSubmit(data) {
     console.log(data);
     try {
@@ -37,9 +48,10 @@ export default function Form() {
         console.log("Login successful!");
 
         console.log("JWT Token: ", responseData.token);
-
+        setIsLoginSuccess(true);
         navigate("/dashboard", { state: { email: data.email } });
       } else {
+        setIsLoginSuccess(false);
         setLoginError("Invalid credentials. Please try again.");
       }
     } catch (error) {
@@ -120,6 +132,22 @@ export default function Form() {
           <img src={bgImg} alt="" />
         </div>
       </div>
+      <Notification
+        listItems={
+          isLoginSuccess
+            ? [
+                {
+                  list: [
+                    {
+                      type: "Login",
+                      content: "Login Successful",
+                    },
+                  ],
+                },
+              ]
+            : []
+        }
+      />
     </section>
   );
 }

@@ -108,8 +108,8 @@ function SpotInfo() {
           </div>
         </div>
 
-        <div className="panel">
-          <div className="panel-heading">Your Information</div>
+        <div className="panel1">
+          <div className="panel-heading1">Your Information</div>
           <div className="your-information-content">
             <label className="input-label">Full Name</label>
             <input
