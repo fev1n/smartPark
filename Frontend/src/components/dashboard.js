@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/dashboard.css";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import SavedVehiclesTab from "../components/SavedVehiclesPage";
+import FavoriteSpotItem from "../components/favoriteSpotItem";
 
 export default function Dashboard() {
   const location = useLocation();
@@ -13,6 +14,8 @@ export default function Dashboard() {
   const [user, setUser] = useState({ email: null });
   const [reservations, setReservations] = useState([]);
   const [showAllReservations, setShowAllReservations] = useState(false);
+  const [favoriteSpots, setFavoriteSpots] = useState([]);
+  const [showAllFavorites, setShowAllFavorites] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("userEmail", emailFromLogin);
@@ -25,6 +28,9 @@ export default function Dashboard() {
     const storedReservations =
       JSON.parse(localStorage.getItem("reservations")) || [];
     setReservations(storedReservations.reverse());
+    const storedFavoriteSpots =
+      JSON.parse(localStorage.getItem("favoriteSpots")) || [];
+    setFavoriteSpots(storedFavoriteSpots);
   }, [emailFromLogin]);
 
   const handleEmailChangeAlert = () => {
@@ -39,14 +45,33 @@ export default function Dashboard() {
     setActiveTab(tabName);
   };
 
+  const clearFavoriteSpots = () => {
+    localStorage.removeItem("favoriteSpots");
+    setFavoriteSpots([]);
+  };
+
+  const removeFavoriteSpot = (spotId) => {
+    const updatedFavoriteSpots = favoriteSpots.filter(
+      (favorite) => favorite.id !== spotId
+    );
+    localStorage.setItem(
+      "favoriteSpots",
+      JSON.stringify(updatedFavoriteSpots)
+    );
+    setFavoriteSpots(updatedFavoriteSpots);
+  };
+
   const clearReservations = () => {
-    // Clear reservations in local storage
     localStorage.removeItem("reservations");
     setReservations([]);
   };
 
   const toggleAllReservations = () => {
     setShowAllReservations(!showAllReservations);
+  };
+
+  const toggleAllFavorites = () => {
+    setShowAllFavorites(!showAllFavorites);
   };
 
   return (
@@ -94,7 +119,6 @@ export default function Dashboard() {
                     </Link>
                   </button>
                 </div>
-                {/* Content for "Settings" */}
                 {activeTab === "Settings" && (
                   <div className="account-settings-left">
                     <div className="panel open">
@@ -124,7 +148,73 @@ export default function Dashboard() {
                     <div className="panel">
                       <div className="panel-heading">Favorite Spots</div>
                       <div className="panel-content">
-                        <p>No favorites saved yet.</p>
+                        {favoriteSpots.length === 0 ? (
+                          <p>No favorites saved yet.</p>
+                        ) : (
+                          <>
+                            {showAllFavorites ? (
+                              <ul className="favorite-spot-list">
+                                {favoriteSpots.map((favorite, index) => (
+                                  <div
+                                    key={index}
+                                    className="favorite-spot-item"
+                                  >
+                                    <FavoriteSpotItem favorite={favorite} />
+                                    <button
+                                      className="btn btn-remove"
+                                      onClick={() =>
+                                        removeFavoriteSpot(favorite.id)
+                                      }
+                                    >
+                                      Remove
+                                    </button>
+                                    <hr />
+                                    <br></br>
+                                  </div>
+                                ))}
+                              </ul>
+                            ) : (
+                              <ul className="favorite-spot-list">
+                                {favoriteSpots.slice(0, 5).map((favorite, index) => (
+                                  <div
+                                    key={index}
+                                    className="favorite-spot-item"
+                                  >
+                                    <FavoriteSpotItem favorite={favorite} />
+                                    <button
+                                      className="btn btn-remove"
+                                      onClick={() =>
+                                        removeFavoriteSpot(favorite.id)
+                                      }
+                                    >
+                                      Remove
+                                    </button>
+                                    <hr />
+                                    <br></br>
+                                  </div>
+                                ))}
+                              </ul>
+                            )}
+                            {favoriteSpots.length > 5 && (
+                              <button
+                                className="btn btn-secondary"
+                                onClick={toggleAllFavorites}
+                              >
+                                {showAllFavorites
+                                  ? "Hide"
+                                  : "Show All"}
+                              </button>
+                            
+                            )}
+                            <br></br>
+                            <button
+                              className="btn btn-danger"
+                              onClick={clearFavoriteSpots}
+                            >
+                              Clear All
+                            </button>
+                          </>
+                        )}
                       </div>
                     </div>
 
@@ -147,25 +237,22 @@ export default function Dashboard() {
                               </ul>
                             ) : (
                               <ul className="reservation-list">
-                                {reservations
-                                  .slice(0, 5)
-                                  .map((reservation, index) => (
-                                    <ReservationItem
-                                      key={index}
-                                      reservation={reservation}
-                                    />
-                                  ))}
+                                {reservations.slice(0, 5).map((reservation, index) => (
+                                  <ReservationItem
+                                    key={index}
+                                    reservation={reservation}
+                                  />
+                                ))}
                               </ul>
                             )}
-                            {reservations.length > 5 &&
-                              !showAllReservations && (
-                                <button
-                                  className="btn btn-secondary"
-                                  onClick={toggleAllReservations}
-                                >
-                                  Show More
-                                </button>
-                              )}
+                            {reservations.length > 5 && !showAllReservations && (
+                              <button
+                                className="btn btn-secondary"
+                                onClick={toggleAllReservations}
+                              >
+                                Show More
+                              </button>
+                            )}
                             {reservations.length > 5 && showAllReservations && (
                               <button
                                 className="btn btn-secondary"
@@ -228,3 +315,4 @@ function ReservationItem({ reservation }) {
     </ol>
   );
 }
+
