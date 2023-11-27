@@ -15,7 +15,7 @@
     font-weight: bold;
   }
   
-  .favorite-btn {
+  .favorite-btn-2 {
     position:relative;
     top: 0;
     left: 0;
@@ -25,6 +25,18 @@
     border: none;
     cursor: pointer;
   }
+
+  .favorite-btn {
+ position:absolute;
+  margin-left: 90%;
+    left: 0;
+    font-size: 1rem;
+    color: red;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
   .h4{
     color: black;
   }

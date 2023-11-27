@@ -187,7 +187,7 @@ function SearchPage() {
                     <p>{selectedSpot.distance}km</p>
                     <button
                       onClick={() => handleAddToFavorites(selectedSpot)}
-                      className="favorite-btn"
+                      className="favorite-btn-2"
                     >
                       <FontAwesomeIcon icon={faHeart} />
                     </button>
