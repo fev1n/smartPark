@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import '../styles/reservationInfo.css';
 
-function ReservationInfo2() {
+const ReservationInfo2 = () => {
   const [reservation, setReservation] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
