@@ -4,6 +4,9 @@ import "../styles/dashboard.css";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import SavedVehiclesTab from "../components/SavedVehiclesPage";
 import FavoriteSpotItem from "../components/favoriteSpotItem";
+import Reservationtab from "../components/reservation";
+import ProfileTab from  "../components/profile";
+import SearchPage from "./search/searchPage";
 
 export default function Dashboard() {
   const location = useLocation();
@@ -12,11 +15,13 @@ export default function Dashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState("Settings");
   const [user, setUser] = useState({ email: null });
+
   const [reservations, setReservations] = useState([]);
   const [showAllReservations, setShowAllReservations] = useState(false);
   const [favoriteSpots, setFavoriteSpots] = useState([]);
   const [showAllFavorites, setShowAllFavorites] = useState(false);
-
+  
+ 
   useEffect(() => {
     localStorage.setItem("userEmail", emailFromLogin);
 
@@ -31,6 +36,8 @@ export default function Dashboard() {
     const storedFavoriteSpots =
       JSON.parse(localStorage.getItem("favoriteSpots")) || [];
     setFavoriteSpots(storedFavoriteSpots);
+
+ 
   }, [emailFromLogin]);
 
   const handleEmailChangeAlert = () => {
@@ -43,6 +50,7 @@ export default function Dashboard() {
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
+
   };
 
   const clearFavoriteSpots = () => {
@@ -68,6 +76,7 @@ export default function Dashboard() {
 
   const toggleAllReservations = () => {
     setShowAllReservations(!showAllReservations);
+      
   };
 
   const toggleAllFavorites = () => {
@@ -79,8 +88,8 @@ export default function Dashboard() {
       <div className="slim-header background-color-bp-dark-blue">
         <div className="container">
           <div className="row">
-            <div className="col-xs-12 text-size-xs-30 text-size-md-36 text-align-xs-center text-align-md-left">
-              Account Settings
+            <div className="col-xs-12 text-size-xs-30 text-size-md-45 text-align-xs-center text-align-md-center">
+            The parking solution you've always wanted !
             </div>
           </div>
         </div>
@@ -98,6 +107,18 @@ export default function Dashboard() {
             <div className="col-lg-9">
               <div className="account-container">
                 <div className="tabs">
+                <p
+                    className={`tab ${activeTab === "SearchPage" && "active"}`}
+                    onClick={() => handleTabClick("SearchPage")}
+                  >
+                    Search spot
+                  </p>
+                <p
+                    className={`tab ${activeTab === "profile" && "active"}`}
+                    onClick={() => handleTabClick("profile")}
+                  >
+                    Profile
+                  </p>
                   <p
                     className={`tab ${activeTab === "Settings" && "active"}`}
                     onClick={() => handleTabClick("Settings")}
@@ -112,6 +133,12 @@ export default function Dashboard() {
                     onClick={() => handleTabClick("Saved Vehicles")}
                   >
                     Saved Vehicles
+                  </p>
+                  <p
+                    className={`tab ${activeTab === 'Reservation Info' && 'active'}`}
+                    onClick={() => handleTabClick('Reservation Info')}
+                  >
+                    Reservation Info
                   </p>
                   <button className="btn">
                     <Link to="/login" className="link">
@@ -217,7 +244,6 @@ export default function Dashboard() {
                         )}
                       </div>
                     </div>
-
                     <div className="panel">
                       <div className="panel-heading">Your Reservations</div>
                       <div className="panel-content">
@@ -280,10 +306,13 @@ export default function Dashboard() {
                         )}
                       </div>
                     </div>
-                  </div>
+                
                 )}
 
                 {activeTab === "Saved Vehicles" && <SavedVehiclesTab />}
+                {activeTab === "profile" && <ProfileTab />}
+                {activeTab === "SearchPage" && <SearchPage />}
+                {activeTab === "Reservation Info" && <Reservationtab  /> }
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@ const search = require("./routes/api/search");
 const payment = require("./routes/api/payment");
 const cors = require("cors");
 const savedVehiclesRoute = require('./routes/api/savedVehicles');
-
+const profileRoute = require('./routes/api/profile')
 const app = express();
 
 // CORS Middleware
@@ -46,6 +46,7 @@ app.use("/api/search", search);
 app.use("/api/payment", payment);
 app.use("/api/help", helpRouter);
 app.use('/api/savedVehicles', savedVehiclesRoute);
+app.use('/api/profile', profileRoute);
 // Server listening check
 app.listen(process.env.PORT, () =>
   console.log(`Server running on port ${process.env.PORT}!!`)

@@ -4,6 +4,7 @@ import SpotList from "./spotList.js";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import "../../styles/SearchPage.css";
 import {
   GoogleMap,
@@ -144,18 +145,12 @@ function SearchPage() {
   };
 
   return (
+    
+  <div className="searchtab">
     <div className="search-container">
-      <div className="navigation-container">
-        <button onClick={() => navigate(-1)} className="go-back-button">
-          ←
-        </button>
-      </div>
-      <br></br>
-      <div className="navigation-container">
-        <h2 className="search-title">
-          Enter your desired destination address here...
-        </h2>
-      </div>
+     <div className="panel-heading3"> Enter your desired destination address here...</div>
+      
+      
       <SearchBar
         onSearch={handleSearchSubmit}
         inputClassName="search-input"
@@ -207,6 +202,7 @@ function SearchPage() {
       </LoadScript>
       <SpotList spots={results} onBookNow={handleBookNow} onAddToFavorites={handleAddToFavorites} />
 
+    </div>
     </div>
   );
 }
