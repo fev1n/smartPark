@@ -1,6 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import SearchBar from "./searchBar.js";
 import SpotList from "./spotList.js";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import "../../styles/SearchPage.css";
 import {
@@ -31,6 +34,29 @@ function SearchPage() {
   const [selectedSpot, setSelectedSpot] = useState(null);
   const mapRef = useRef(null);
   const [mapCenter, setMapCenter] = useState({ lat: -34.397, lng: 150.644 });
+
+  useEffect(() => {
+    // When the component mounts, remove duplicates from favorites in local storage
+    const favoriteSpots = JSON.parse(localStorage.getItem("favoriteSpots")) || [];
+    const uniqueFavorites = Array.from(new Set(favoriteSpots.map(spot => spot.address)))
+      .map(address => favoriteSpots.find(spot => spot.address === address));
+  
+    localStorage.setItem("favoriteSpots", JSON.stringify(uniqueFavorites));
+  }, []);
+  const handleAddToFavorites = (spot) => {
+    const existingFavorites = JSON.parse(localStorage.getItem("favoriteSpots")) || [];
+  
+    const isAlreadyInFavorites = existingFavorites.some((favSpot) => favSpot.address === spot.address);
+  
+    if (!isAlreadyInFavorites) {
+      const updatedFavorites = [...existingFavorites, spot];
+      localStorage.setItem("favoriteSpots", JSON.stringify(updatedFavorites));
+      alert(`${spot.name} added to favorites!`);
+    } else {
+      alert('Spot is already in favorites!');
+    }
+  };
+
 
   const handleSearchSubmit = async (location) => {
     try {
@@ -155,11 +181,18 @@ function SearchPage() {
                     <p>{selectedSpot.address}</p>
                     <p>{selectedSpot.distance}km</p>
                     <button
+                      onClick={() => handleAddToFavorites(selectedSpot)}
+                      className="favorite-btn-2"
+                    >
+                      <FontAwesomeIcon icon={faHeart} />
+                    </button>
+                    <button
                       onClick={() => handleBookNow(selectedSpot)}
                       className="book-now-btn"
                     >
                       Book Now
                     </button>
+                 
                   </div>
                 </InfoWindow>
               )}
@@ -167,7 +200,8 @@ function SearchPage() {
           ))}
         </GoogleMap>
       </LoadScript>
-      <SpotList spots={results} onBookNow={handleBookNow} />
+      <SpotList spots={results} onBookNow={handleBookNow} onAddToFavorites={handleAddToFavorites} />
+
     </div>
     </div>
   );

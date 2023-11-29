@@ -49,10 +49,11 @@ function Navbar() {
       <Notification listItems={listItems} /></div>
       <div className={`navbar ${isNavbarActive ? 'active' : ''}`} >
         <ul>
-          
+        <li><Link to="/dashboard">Dashboard</Link></li>
+
           <li><Link to="/about">About</Link></li>
           <li><Link to="/Help">Help</Link></li>
-        
+
         </ul>
         
       </div>
