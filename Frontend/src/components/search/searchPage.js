@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import SearchBar from "./searchBar.js";
 import SpotList from "./spotList.js";
-import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, Link, useNavigate } from "react-router-dom";
@@ -37,26 +36,30 @@ function SearchPage() {
 
   useEffect(() => {
     // When the component mounts, remove duplicates from favorites in local storage
-    const favoriteSpots = JSON.parse(localStorage.getItem("favoriteSpots")) || [];
-    const uniqueFavorites = Array.from(new Set(favoriteSpots.map(spot => spot.address)))
-      .map(address => favoriteSpots.find(spot => spot.address === address));
-  
+    const favoriteSpots =
+      JSON.parse(localStorage.getItem("favoriteSpots")) || [];
+    const uniqueFavorites = Array.from(
+      new Set(favoriteSpots.map((spot) => spot.address))
+    ).map((address) => favoriteSpots.find((spot) => spot.address === address));
+
     localStorage.setItem("favoriteSpots", JSON.stringify(uniqueFavorites));
   }, []);
   const handleAddToFavorites = (spot) => {
-    const existingFavorites = JSON.parse(localStorage.getItem("favoriteSpots")) || [];
-  
-    const isAlreadyInFavorites = existingFavorites.some((favSpot) => favSpot.address === spot.address);
-  
+    const existingFavorites =
+      JSON.parse(localStorage.getItem("favoriteSpots")) || [];
+
+    const isAlreadyInFavorites = existingFavorites.some(
+      (favSpot) => favSpot.address === spot.address
+    );
+
     if (!isAlreadyInFavorites) {
       const updatedFavorites = [...existingFavorites, spot];
       localStorage.setItem("favoriteSpots", JSON.stringify(updatedFavorites));
       alert(`${spot.name} added to favorites!`);
     } else {
-      alert('Spot is already in favorites!');
+      alert("Spot is already in favorites!");
     }
   };
-
 
   const handleSearchSubmit = async (location) => {
     try {
@@ -145,64 +148,67 @@ function SearchPage() {
   };
 
   return (
-    
-  <div className="searchtab">
-    <div className="search-container">
-     <div className="panel-heading3"> Enter your desired destination address here...</div>
-      
-      
-      <SearchBar
-        onSearch={handleSearchSubmit}
-        inputClassName="search-input"
-        buttonClassName="search-button"
-      />
+    <div className="searchtab">
+      <div className="search-container">
+        <div className="panel-heading3">
+          {" "}
+          Enter your desired destination address here...
+        </div>
 
-      <LoadScript googleMapsApiKey="AIzaSyD3q0Mxt9mnz2s3PcSAHez5tJbXvbje8_Y">
-        <GoogleMap
-          mapContainerStyle={{ width: "100%", height: "400px" }}
-          center={mapCenter}
-          zoom={14}
-          ref={mapRef}
-        >
-          {results.map((spot, index) => (
-            <Marker
-              key={index}
-              position={{ lat: spot.lat, lng: spot.lng }}
-              title={spot.name}
-              onClick={() => setSelectedSpot(spot)}
-            >
-              {selectedSpot && selectedSpot.id === spot.id && (
-                <InfoWindow
-                  position={{ lat: selectedSpot.lat, lng: selectedSpot.lng }}
-                  onCloseClick={() => setSelectedSpot(null)}
-                >
-                  <div>
-                    <h4>{selectedSpot.name}</h4>
-                    <p>{selectedSpot.address}</p>
-                    <p>{selectedSpot.distance}km</p>
-                    <button
-                      onClick={() => handleAddToFavorites(selectedSpot)}
-                      className="favorite-btn-2"
-                    >
-                      <FontAwesomeIcon icon={faHeart} />
-                    </button>
-                    <button
-                      onClick={() => handleBookNow(selectedSpot)}
-                      className="book-now-btn"
-                    >
-                      Book Now
-                    </button>
-                 
-                  </div>
-                </InfoWindow>
-              )}
-            </Marker>
-          ))}
-        </GoogleMap>
-      </LoadScript>
-      <SpotList spots={results} onBookNow={handleBookNow} onAddToFavorites={handleAddToFavorites} />
+        <SearchBar
+          onSearch={handleSearchSubmit}
+          inputClassName="search-input"
+          buttonClassName="search-button"
+        />
 
-    </div>
+        <LoadScript googleMapsApiKey="AIzaSyD3q0Mxt9mnz2s3PcSAHez5tJbXvbje8_Y">
+          <GoogleMap
+            mapContainerStyle={{ width: "100%", height: "400px" }}
+            center={mapCenter}
+            zoom={14}
+            ref={mapRef}
+          >
+            {results.map((spot, index) => (
+              <Marker
+                key={index}
+                position={{ lat: spot.lat, lng: spot.lng }}
+                title={spot.name}
+                onClick={() => setSelectedSpot(spot)}
+              >
+                {selectedSpot && selectedSpot.id === spot.id && (
+                  <InfoWindow
+                    position={{ lat: selectedSpot.lat, lng: selectedSpot.lng }}
+                    onCloseClick={() => setSelectedSpot(null)}
+                  >
+                    <div>
+                      <h4>{selectedSpot.name}</h4>
+                      <p>{selectedSpot.address}</p>
+                      <p>{selectedSpot.distance}km</p>
+                      <button
+                        onClick={() => handleAddToFavorites(selectedSpot)}
+                        className="favorite-btn-2"
+                      >
+                        <FontAwesomeIcon icon={faHeart} />
+                      </button>
+                      <button
+                        onClick={() => handleBookNow(selectedSpot)}
+                        className="book-now-btn"
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </InfoWindow>
+                )}
+              </Marker>
+            ))}
+          </GoogleMap>
+        </LoadScript>
+        <SpotList
+          spots={results}
+          onBookNow={handleBookNow}
+          onAddToFavorites={handleAddToFavorites}
+        />
+      </div>
     </div>
   );
 }
