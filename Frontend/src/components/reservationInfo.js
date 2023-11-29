@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "../styles/reservationInfo.css";
 
-function ReservationTracking() {
+const ReservationTracking = () => {
   const [status, setStatus] = useState("Pending");
 
   const location = useLocation();
