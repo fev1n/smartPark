@@ -157,3 +157,13 @@
   font-weight: bold;
   align-self: flex-end;
 }
+
+.favorite-btn-2 {
+  color: gray; /* or any other color you prefer for the default state */
+  transition: color 0.3s ease; /* Add a transition effect for a smooth color change */
+}
+
+.favorite-btn-2.favorited {
+  color: red; /* or any other color you prefer for the favorited state */
+}
+
