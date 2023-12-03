@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import "../styles/dashboard.css";
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import SavedVehiclesTab from "../components/SavedVehiclesPage";
 import FavoriteSpotItem from "../components/favoriteSpotItem";
 import Reservationtab from "../components/reservation";
