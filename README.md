@@ -51,7 +51,7 @@ Follow these steps to install and run the project:
 
 Open below link to acces the application, here are credential to login:
 
-Link to web app: ```https://smart-park-dimas-projects-53bcc0c4.vercel.app/login```
+Link to web app: https://smart-park-dimas-projects-53bcc0c4.vercel.app/login
 
 User email ID: ```admin@admin.com```
 
